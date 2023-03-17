@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: mongodb
+      DB_DATABASE: url_shortner
+      DB_USERNAME: user
+      DB_PASSWORD: pass 
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app/backend
+    depends_on:
+      - mongodb
+    networks:
+      - app
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - app
+
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+    networks:
+      - app
+
+networks:
+
+  app:
+    driver: bridge
