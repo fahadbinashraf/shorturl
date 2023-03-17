@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
 
@@ -24,23 +24,24 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
-    tty: true
     ports:
       - 3000:3000
+    volumes:
+      - ./frontend/src:/app/frontend/src
     depends_on:
       - backend
     networks:
       - app
 
   mongodb:
-    image: mongodb/mongodb-community-server:6.0-ubi8
+    image: bitnami/mongodb:latest
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGODB_ROOT_USER=user
+      - MONGODB_ROOT_PASSWORD=pass
+      - MONGODB_DISABLE_SYSTEM_LOG=true
+
     volumes:
-      - type: bind
-        source: ./data
-        target: /data/db
+      - mongodb:/bitnami/mongodb
     networks:
       - app
 
@@ -48,3 +49,6 @@ networks:
 
   app:
     driver: bridge
+
+volumes:
+  mongodb:
