@@ -39,7 +39,8 @@ services:
       - MONGODB_ROOT_USER=user
       - MONGODB_ROOT_PASSWORD=pass
       - MONGODB_DISABLE_SYSTEM_LOG=true
-
+    ports:
+      - 27017:27017
     volumes:
       - mongodb:/bitnami/mongodb
     networks:
