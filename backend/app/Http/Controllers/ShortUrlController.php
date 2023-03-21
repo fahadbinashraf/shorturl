@@ -15,7 +15,7 @@ class ShortUrlController extends Controller
         return ShortUrl::all();
     }
 
-    public function encode(Request $request): JsonResponse
+    public function create(Request $request): JsonResponse
     {
         $request->validate([
             'url' => ['required']

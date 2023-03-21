@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('shorturls/list', [ShortUrlController::class, 'list']);
-Route::post('shorturls/encode', [ShortUrlController::class, 'encode']);
+Route::get('shorturl', [ShortUrlController::class, 'list']);
+Route::post('shorturl', [ShortUrlController::class, 'create']);

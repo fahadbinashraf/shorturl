@@ -1,32 +1,36 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import { Card, Layout, ConfigProvider } from "antd";
+import React from "react";
+import URLForm from "./components/URLForm";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
+  const { Header, Content } = Layout;
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>works well</p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#009ba5",
+        },
+      }}
+    >
+      <Layout className="layout">
+        <Header>
+          <div className="logo">SHORTURL</div>
+        </Header>
+        <Content style={{ padding: "0 150px" }}>
+          <Card
+            bordered={false}
+            style={{
+              width: 400,
+              margin: "0 auto",
+              marginTop: 100,
+            }}
+          >
+            <URLForm />
+          </Card>
+        </Content>
+      </Layout>
+    </ConfigProvider>
   );
-}
+};
 
 export default App;
