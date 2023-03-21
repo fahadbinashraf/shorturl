@@ -62,6 +62,7 @@ const URLForm = () => {
               },
             },
           ]}
+          validateFirst
         >
           <Input placeholder="Enter a long url..." />
         </Form.Item>
