@@ -97,7 +97,7 @@ return [
             'driver' => 'mongodb',
             'host' => env('DB_HOST', 'mongodb'),
             'port' => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'url_shortner'),
+            'database' => env('DB_DATABASE', 'shorturl'),
             'username' => env('DB_USERNAME', 'user'),
             'password' => env('DB_PASSWORD', 'pass'),
         ],

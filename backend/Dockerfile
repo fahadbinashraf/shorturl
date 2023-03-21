@@ -17,7 +17,6 @@ COPY . .
 
 RUN composer install
 
-# RUN php artisan migrate
 
 EXPOSE 8000
 

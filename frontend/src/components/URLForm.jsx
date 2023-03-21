@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Space, message } from "antd";
-import { LinkOutlined, CopyOutlined } from "@ant-design/icons";
+import { LinkOutlined } from "@ant-design/icons";
+import { Button, Form, Input, message } from "antd";
+import React, { useEffect } from "react";
 import useHttp from "../hooks/use-http";
 import { shortURLService } from "../services/shortURL.service";
 import ShortURL from "./ShortURL";
