@@ -24,9 +24,6 @@ const URLForm = () => {
   const handleOnFinish = (values) => {
     createShortURL(values.long_url);
   };
-  const handleOnFinishFail = (errorInfo) => {
-    console.log("failed", errorInfo);
-  };
   const loading = status === "pending";
   return (
     <>
@@ -36,7 +33,6 @@ const URLForm = () => {
         layout="vertical"
         size="large"
         onFinish={handleOnFinish}
-        onFinishFailed={handleOnFinishFail}
         requiredMark={false}
         disabled={loading}
       >
@@ -47,9 +43,27 @@ const URLForm = () => {
             </span>
           }
           name="long_url"
-          rules={[{ required: true, message: "The URL field is required." }]}
+          rules={[
+            { required: true, message: "The URL field is required." },
+            {
+              type: "url",
+              message: "Please enter a valid URL.",
+            },
+            {
+              message: "Please enter URL associated with 'rebuy.de' only.",
+              validator: (_, value) => {
+                if (
+                  !value ||
+                  value.match(/https?:\/\/(www\.)?rebuy.de(\/\w+)?/)
+                ) {
+                  return Promise.resolve();
+                }
+                return Promise.reject();
+              },
+            },
+          ]}
         >
-          <Input placeholder="long url..." />
+          <Input placeholder="Enter a long url..." />
         </Form.Item>
         {responseData && responseData.data?.short && (
           <ShortURL url={responseData.data.short} />
