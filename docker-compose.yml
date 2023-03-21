@@ -15,7 +15,11 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./backend:/app/backend
+      - ./backend/app:/app/backend/app
+      - ./backend/database:/app/backend/database
+      - ./backend/routes:/app/backend/routes
+      - ./backend/.env:/app/backend/.env
+      - ./backend/composer.json:/app/backend/composer.json
     depends_on:
       - mongodb
     networks:

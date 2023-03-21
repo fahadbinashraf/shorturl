@@ -23,11 +23,13 @@ class ShortUrlController extends Controller
                 'url' => ['required', new RebuyURL]
             ]);
 
+            // get url from request
             $url = $request->url;
-            $base62 = new Base62();
-            $code = $base62->encode(md5($url));
-            $code = substr($code, 0, 4);
 
+            // encode the url into 4 chars
+            $code = $this->encode($url);
+
+            // insert or reterieve if already exists in DB
             $shortUrl = ShortUrl::firstOrCreate([
                 'long' => $url,
                 'short' => env('APP_URL') . '/' . $code
@@ -55,5 +57,16 @@ class ShortUrlController extends Controller
         } else {
             return abort(404);
         }
+    }
+    /**
+     * creates a 4 char long code for a given URL
+     *
+     */
+    public function encode(string $url): string
+    {
+        $base62 = new Base62();
+        $code = $base62->encode(md5($url));
+        $code = substr($code, 0, 4);
+        return $code;
     }
 }
